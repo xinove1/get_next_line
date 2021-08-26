@@ -33,6 +33,8 @@ char	*get_next_line(int fd)
 		return (s);
 	while (read_to_buffer(last, buffer, &s, fd))
 		;
+	if (s == NULL)
+		clear_last(&reminders, fd);
 	return (s);
 }
 

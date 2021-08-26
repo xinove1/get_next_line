@@ -101,3 +101,27 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	((char *) dst)[i] = '\0';
 	return (dst);
 }
+
+void	clear_last(t_last **lasts, int fd)
+{
+	t_last	*tmp;
+	t_last	*clear;
+
+	if (!*lasts)
+		return ;
+	clear = *lasts;
+	tmp = NULL;
+	while (clear->fd != fd && clear->next)
+	{
+		tmp = clear;
+		clear = clear->next;
+	}
+	if (clear->fd == fd)
+	{
+		if (tmp)
+			tmp->next = NULL;
+		else
+			*lasts = NULL;
+		free(clear);
+	}
+}
