@@ -1,0 +1,9 @@
+#+TITLE: Gnl
+
+* GNL (Get Next Line)
+
+** TODO File descriptors
+** TODO Read
+** TODO Static variable, precompile buffer
+** olhar linha a linha append string, possivel declarar ela como 0, e simplificar a função, tirando o 1 if
+** quando read 0, retorno string, se vazia null, se nao nao, idai de cima se torna chula
