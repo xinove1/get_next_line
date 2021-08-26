@@ -26,7 +26,7 @@ int	read_to_buffer(char *last, char buffer[BUFFER_SIZE + 1], char **s, int fd)
 
 	i = 0;
 	flag = read(fd, buffer, BUFFER_SIZE);
-	if (flag == 0)
+	if (flag <= 0)
 		return (0);
 	buffer[flag] = 0;
 	while (buffer[i] && buffer[i] != '\n')
