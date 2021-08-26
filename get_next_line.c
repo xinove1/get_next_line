@@ -7,6 +7,8 @@ char	*get_next_line(int fd)
 	char		buffer[BUFFER_SIZE + 1];
 	char		*s;
 
+	if (fd < 0 || fd > RLIMIT_NOFILE || BUFFER_SIZE < 1 )
+		return (NULL);
 	buffer[BUFFER_SIZE] = 0;
 	buffer[0] = 0;
 	s = NULL;
