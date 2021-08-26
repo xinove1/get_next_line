@@ -20,7 +20,7 @@ int	main(void)
 	for (i = 0; i < 10;i++)
 	{
 		nextline = get_next_line(teste);
-		printf("|%s|", nextline);
+		printf("%s", nextline);
 		free(nextline);
 	}
 	close(teste);

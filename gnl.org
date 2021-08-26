@@ -2,8 +2,6 @@
 
 * GNL (Get Next Line)
 
-** TODO File descriptors
-** TODO Read
-** TODO Static variable, precompile buffer
-** olhar linha a linha append string, possivel declarar ela como 0, e simplificar a função, tirando o 1 if
-** quando read 0, retorno string, se vazia null, se nao nao, idai de cima se torna chula
+* bonus
+struck next, reminder[buffer_size + 1], fd
+manter função igual, mas no começo do gnl pusha um função q ve se nao ja tem um node criado para o fd atual, se precisar cria, e retorna o reminder para o fd atual

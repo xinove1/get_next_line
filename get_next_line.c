@@ -1,17 +1,19 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
+static int	read_to_buffer(char *last, char buffer[], char **s, int fd);
+static int	process_last(char **s, char last[]);
+static char	*append_to_string(char *s, char *src, int src_size);
+
 char	*get_next_line(int fd)
 {
 	static char	last[BUFFER_SIZE + 1] = {'\0'};
 	char		buffer[BUFFER_SIZE + 1];
 	char		*s;
 
+	s = NULL;
 	if (fd < 0 || fd > RLIMIT_NOFILE || BUFFER_SIZE < 1 )
 		return (NULL);
-	buffer[BUFFER_SIZE] = 0;
-	buffer[0] = 0;
-	s = NULL;
 	if (last[0] != '\0' && process_last(&s, last))
 		return (s);
 	while (read_to_buffer(last, buffer, &s, fd))
@@ -19,7 +21,7 @@ char	*get_next_line(int fd)
 	return (s);
 }
 
-int	read_to_buffer(char *last, char buffer[BUFFER_SIZE + 1], char **s, int fd)
+static int	read_to_buffer(char *last, char buffer[], char **s, int fd)
 {
 	int	i;
 	int	flag;
@@ -28,7 +30,7 @@ int	read_to_buffer(char *last, char buffer[BUFFER_SIZE + 1], char **s, int fd)
 	flag = read(fd, buffer, BUFFER_SIZE);
 	if (flag <= 0)
 		return (0);
-	buffer[flag] = 0;
+	buffer[flag] = '\0';
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	*s = append_to_string(*s, buffer, i + 1);
@@ -39,7 +41,7 @@ int	read_to_buffer(char *last, char buffer[BUFFER_SIZE + 1], char **s, int fd)
 	return (1);
 }
 
-int	process_last(char **s, char last[BUFFER_SIZE + 1])
+static int	process_last(char **s, char last[])
 {
 	int		i;
 	int		flag;
@@ -64,7 +66,7 @@ int	process_last(char **s, char last[BUFFER_SIZE + 1])
 	return (flag);
 }
 
-char	*append_to_string(char *s, char *src, int src_size)
+static char	*append_to_string(char *s, char *src, int src_size)
 {
 	int		i;
 	char	*tmp;
@@ -74,8 +76,8 @@ char	*append_to_string(char *s, char *src, int src_size)
 		tmp = malloc(src_size + 1);
 		if (!tmp)
 			return (NULL);
-		tmp[0] = 0;
-		ft_strlcat(tmp, src, src_size + 1);
+		tmp[0] = '\0';
+		i = 0;
 	}
 	else
 	{
@@ -83,10 +85,10 @@ char	*append_to_string(char *s, char *src, int src_size)
 		tmp = malloc(i + src_size + 1);
 		if (!tmp)
 			return (NULL);
-		tmp[0] = 0;
+		tmp[0] = '\0';
 		ft_strlcat(tmp, s, i + src_size + 1);
 		free(s);
-		ft_strlcat(tmp, src, i + src_size + 1);
 	}
+	ft_strlcat(tmp, src, i + src_size + 1);
 	return (tmp);
 }
