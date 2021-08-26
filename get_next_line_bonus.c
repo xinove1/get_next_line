@@ -33,7 +33,6 @@ char	*get_next_line(int fd)
 		return (s);
 	while (read_to_buffer(last, buffer, &s, fd))
 		;
-	printf("last:%s\n",last);
 	return (s);
 }
 
@@ -115,7 +114,6 @@ static char *get_last(t_last **lasts, int fd)
 
 	if (!*lasts)
 	{
-		printf("Last Comes Null, creating one\n");
 		*lasts = malloc(sizeof(t_last));
 		(*lasts)->fd = fd;
 		(*lasts)->reminder[0] = '\0';
@@ -126,13 +124,9 @@ static char *get_last(t_last **lasts, int fd)
 	while (tmp->fd != fd && tmp->next)
 		tmp = tmp->next;
 	if (tmp->fd == fd)
-	{
-		printf("Last for this fd found, returning reminder\n");
 		return (tmp->reminder);
-	}
 	else
 	{
-		printf("Last of this fd dosent exist, creating one\n");
 		tmp->next = malloc(sizeof(t_last));
 		tmp = tmp->next;
 		tmp->fd = fd;
