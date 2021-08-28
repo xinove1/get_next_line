@@ -20,7 +20,7 @@ static char *get_last(t_last **lasts, int fd);
 
 char	*get_next_line(int fd)
 {
-	static t_last	*reminders;
+	static t_last	*reminders = NULL;
 	char			*last;
 	char			buffer[BUFFER_SIZE + 1];
 	char			*s;

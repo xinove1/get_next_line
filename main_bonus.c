@@ -9,8 +9,9 @@ int	main(void)
 {
 	//char	**nextline = malloc(10 * sizeof(char**));
 	char *nextline;
-	int teste = open("./teste.txt", O_RDONLY);
-	int teste2 = open("./teste2.txt", O_RDONLY);
+	int fd0 = open("../gnlTester/files/41_with_nl", O_RDWR);
+	int fd1 = open("../gnlTester/files/42_with_nl", O_RDWR);
+	int fd2 = open("../gnlTester/files/43_with_nl", O_RDWR);
 	int i = 0;
 	/* char guys = 1; */
 	/* if (guys) */
@@ -20,14 +21,21 @@ int	main(void)
 	//while (nextline)
 	for (i = 0; i < 5;i++)
 	{
-		nextline = get_next_line(teste);
+		nextline = get_next_line(fd0);
 		printf("%s", nextline);
 		free(nextline);
-		nextline = get_next_line(teste2);
+
+		nextline = get_next_line(fd1);
+		printf("%s", nextline);
+		free(nextline);
+
+		nextline = get_next_line(fd2);
 		printf("%s", nextline);
 		free(nextline);
 	}
-	close(teste);
+	close(fd0);
+	close(fd2);
+	close(fd1);
 }
 
 void free_array(char **s)

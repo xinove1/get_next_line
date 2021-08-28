@@ -118,10 +118,10 @@ void	clear_last(t_last **lasts, int fd)
 	}
 	if (clear->fd == fd)
 	{
+		if (clear == *lasts)
+			*lasts = clear->next;
 		if (tmp)
-			tmp->next = NULL;
-		else
-			*lasts = NULL;
+			tmp->next = clear->next;
 		free(clear);
 	}
 }
