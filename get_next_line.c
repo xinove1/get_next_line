@@ -47,7 +47,7 @@ static int	read_to_buffer(char *last, char buffer[], char **s, int fd)
 	*s = append_to_string(*s, buffer, i + 1);
 	if (buffer[i] == '\n' && buffer[i + 1])
 		ft_memmove(last, &buffer[i + 1], BUFFER_SIZE - i);
-	if (buffer[i] == '\n' || i < BUFFER_SIZE)
+	if (buffer[i] == '\n')
 		return (0);
 	return (1);
 }

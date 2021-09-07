@@ -16,7 +16,7 @@
 static int	read_to_buffer(char *last, char buffer[], char **s, int fd);
 static int	process_last(char **s, char last[]);
 static char	*append_to_string(char *s, char *src, int src_size);
-static char *get_last(t_last **lasts, int fd);
+static char	*get_last(t_last **lasts, int fd);
 
 char	*get_next_line(int fd)
 {
@@ -53,7 +53,7 @@ static int	read_to_buffer(char *last, char buffer[], char **s, int fd)
 	*s = append_to_string(*s, buffer, i + 1);
 	if (buffer[i] == '\n' && buffer[i + 1])
 		ft_memmove(last, &buffer[i + 1], BUFFER_SIZE - i);
-	if (buffer[i] == '\n' || i < BUFFER_SIZE)
+	if (buffer[i] == '\n')
 		return (0);
 	return (1);
 }
@@ -110,9 +110,9 @@ static char	*append_to_string(char *s, char *src, int src_size)
 	return (tmp);
 }
 
-static char *get_last(t_last **lasts, int fd)
+static char	*get_last(t_last **lasts, int fd)
 {
-	t_last *tmp;
+	t_last	*tmp;
 
 	if (!*lasts)
 	{
